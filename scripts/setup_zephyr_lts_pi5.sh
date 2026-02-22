@@ -31,6 +31,11 @@ if [[ "$(uname -m)" != "aarch64" ]]; then
   warn "Host arch is $(uname -m), script is tuned for Pi5 aarch64. Continuing."
 fi
 
+# Ensure user-local tools are discoverable in non-login shells.
+if [[ -d "$HOME/.local/bin" ]]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+
 if [[ "$INSTALL_DEPS" == "1" ]]; then
   if [[ "$ALLOW_SUDO_PROMPT" != "1" ]] && ! have_noninteractive_sudo; then
     echo "INSTALL_DEPS=1 requires passwordless sudo for unattended setup." >&2
@@ -48,10 +53,6 @@ fi
 if ! command -v uv >/dev/null 2>&1; then
   log "Installing uv"
   curl -LsSf https://astral.sh/uv/install.sh | sh
-fi
-
-if [[ -x "$HOME/.local/bin/uv" ]]; then
-  export PATH="$HOME/.local/bin:$PATH"
 fi
 
 if ! command -v uv >/dev/null 2>&1; then
@@ -103,10 +104,10 @@ if [[ ! -d "$SDK_DIR" ]]; then
 fi
 
 if [[ -x "$SDK_DIR/setup.sh" && ! -f "$SDK_DIR/.setup-complete" ]]; then
-  log "Running Zephyr SDK setup.sh (non-interactive, log: /tmp/zephyr_sdk_setup.log)"
+  log "Running Zephyr SDK setup.sh (-h -c, log: /tmp/zephyr_sdk_setup.log)"
   (
     cd "$SDK_DIR"
-    yes "" | ./setup.sh >/tmp/zephyr_sdk_setup.log 2>&1
+    ./setup.sh -h -c >/tmp/zephyr_sdk_setup.log 2>&1
   )
   touch "$SDK_DIR/.setup-complete"
 fi

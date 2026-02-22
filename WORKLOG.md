@@ -25,3 +25,9 @@
 - [1771783397] Hit remote-access blocker while resuming: Pi5 SSH port 22 timed out from workstation; setup completion pending when connectivity returns.
 - [1771783397] Hardened setup script for unattended reruns: INSTALL_UDEV_RULES defaulted to 0, non-interactive sudo checks added, and SDK download logging/noise improved.
 - [1771783397] Updated README.md and ZEPHYR_LTS_PI5_SETUP.md with script-first workflow and resume commands.
+- [1771785007] Reconnected after Pi5 reboot; verified SSH and passwordless sudo (sudo -n true) are operational.
+- [1771785007] Resumed Zephyr setup on Pi5 and identified SDK installer loop caused by piping blank input to setup.sh interactive prompt.
+- [1771785007] Fixed scripts/setup_zephyr_lts_pi5.sh to run Zephyr SDK setup non-interactively with explicit flags: ./setup.sh -h -c.
+- [1771785007] Completed Pi5 Zephyr LTS setup end-to-end: SDK installed, hal_espressif blobs fetched, and hello_world built for esp32s3_touch_lcd_1_28/esp32s3/procpu.
+- [1771785007] Performed post-build RAM hygiene on Pi5 with no heavy job running: sync + drop_caches; free memory increased from ~502MiB to ~3.5GiB.
+- [1771785007] Improved script robustness for non-login shells by exporting ~/.local/bin before uv detection (prevents repeated uv reinstall).
