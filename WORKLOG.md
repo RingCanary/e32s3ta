@@ -31,3 +31,6 @@
 - [1771785007] Completed Pi5 Zephyr LTS setup end-to-end: SDK installed, hal_espressif blobs fetched, and hello_world built for esp32s3_touch_lcd_1_28/esp32s3/procpu.
 - [1771785007] Performed post-build RAM hygiene on Pi5 with no heavy job running: sync + drop_caches; free memory increased from ~502MiB to ~3.5GiB.
 - [1771785007] Improved script robustness for non-login shells by exporting ~/.local/bin before uv detection (prevents repeated uv reinstall).
+- [1771785240] Flashed Zephyr hello_world image to ESP32-S3 from Pi5 using west flash (runner esp32) on /dev/ttyACM0.
+- [1771785240] Verified runtime over UART: captured ESP32-S3 boot log and Zephyr banner with 'Hello World! esp32s3_touch_lcd_1_28/esp32s3/procpu'.
+- [1771785240] In non-interactive SSH, west espressif monitor failed due TTY dependency; used pyserial capture from Zephyr venv to validate serial output.
