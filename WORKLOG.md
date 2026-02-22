@@ -47,3 +47,4 @@
 - [1771787954] Updated README/ZEPHYR_LTS_PI5_SETUP.md/ZEPHYR_DEBUG_RECON.md/.gitignore with UART-only first-project details and Zephyr project ignore patterns.
 - [1771788075] Updated hello_lcd rendering to explicit black background + white text for guaranteed visibility; rebuilt/reflashed and reconfirmed UART markers with zero touch/I2C errors.
 - [1771788441] Debugged no-LCD-render symptom: identified non-touch board mismatch (LCD_RST on GPIO12 vs Zephyr touch target GPIO14), patched hello_lcd/app.overlay with reset remap + SPI2 pinctrl override (MOSI/SCLK/CS-only), rebuilt/reflashed, and reconfirmed UART boot/app markers with zero touch I2C spam.
+- [1771788812] Added explicit GPIO40 backlight enable + startup pulse probe in hello_lcd; reflashed and user-confirmed on-screen 'Hello World!' visibility.

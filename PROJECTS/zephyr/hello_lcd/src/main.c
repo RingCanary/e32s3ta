@@ -6,6 +6,7 @@
 #include <zephyr/device.h>
 #include <zephyr/devicetree.h>
 #include <zephyr/drivers/display.h>
+#include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include <lvgl.h>
@@ -15,10 +16,28 @@ LOG_MODULE_REGISTER(app, CONFIG_LOG_DEFAULT_LEVEL);
 int main(void)
 {
 	const struct device *display_dev = DEVICE_DT_GET(DT_CHOSEN(zephyr_display));
+	const struct device *gpio0_dev = DEVICE_DT_GET(DT_NODELABEL(gpio0));
 
 	if (!device_is_ready(display_dev)) {
 		LOG_ERR("Display device is not ready");
 		return 0;
+	}
+
+	/* Waveshare ESP32-S3-LCD-1.28 (non-touch): backlight control is GPIO40. */
+	if (device_is_ready(gpio0_dev)) {
+		if (gpio_pin_configure(gpio0_dev, 40, GPIO_OUTPUT_ACTIVE) != 0) {
+			LOG_ERR("Failed to enable LCD backlight on GPIO40");
+		} else {
+			/* Visible probe: pulse backlight a few times during boot. */
+			for (int i = 0; i < 3; i++) {
+				gpio_pin_set(gpio0_dev, 40, 0);
+				k_sleep(K_MSEC(120));
+				gpio_pin_set(gpio0_dev, 40, 1);
+				k_sleep(K_MSEC(120));
+			}
+		}
+	} else {
+		LOG_ERR("GPIO0 device is not ready");
 	}
 
 	lv_obj_t *screen = lv_scr_act();
