@@ -9,3 +9,7 @@
 - [1771775885] Generalized README for Linux/WSL direct-serial workflow; removed environment-specific SSH instructions.
 - [1771775885] Uploaded logo_anim.py+main.py to board and executed finite logo preview successfully via mpremote.
 - [1771775889] On Pi5, stopped ModemManager to prevent /dev/ttyACM0 grabs during flashing/mpremote sessions.
+- [1771776123] Generated OpenAI logo assets in QUICK/assets (source PNG, board-sized BMP, board-sized JPG).
+- [1771776123] Optimized logo animation to low-refresh dirty-region updates (no full-frame redraw in loop).
+- [1771776123] Added logo_show.py and updated boot flow to show logo splash then optimized animation.
+- [1771776123] Uploaded updated scripts/assets to board and validated logo display + finite animation run.
