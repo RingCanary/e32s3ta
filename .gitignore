@@ -19,6 +19,10 @@ dependencies.lock
 CMakeCache.txt
 CMakeFiles/
 compile_commands.json
+zephyr/.cache/
+PROJECTS/zephyr/*/build/
+PROJECTS/zephyr/*/build*/
+PROJECTS/zephyr/*/.cache/
 
 # Rust build outputs
 target/

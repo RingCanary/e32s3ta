@@ -48,6 +48,34 @@ Date: 2026-02-22
 - Non-interactive monitor capture works and is scripted.
 - GDB/OpenOCD scripting is prepared, but blocked until USB-JTAG endpoint is present.
 
+## Module USB/Pinout Study (Waveshare ESP32-S3-LCD-1.28)
+| Area | Board Net / Function | ESP32-S3 Pin | Notes |
+|---|---|---|---|
+| USB-C D+ / D- | `DP1/DP2`, `DN1/DN2` -> `USB_P/USB_N` -> CH343P `UD+`/`UD-` | Not direct to native USB path | USB data pair is routed through CH343P USB-UART bridge path |
+| USB serial bridge | CH343P UART path | `GPIO43` (`U0TXD`), `GPIO44` (`U0RXD`) | Primary flashing/log serial path over USB-C |
+| Auto download | CH343P DTR/RTS control | `GPIO0` + reset line | Used for boot/reset automation |
+| LCD SPI | `LCD_DC`, `LCD_CS`, `LCD_CLK`, `LCD_MOSI`, `LCD_RST` | `GPIO8`, `GPIO9`, `GPIO10`, `GPIO11`, `GPIO12` | Occupied by display |
+| LCD backlight | `LCD_BL` | `GPIO40` | Occupied by display backlight |
+| IMU I2C | `SDA`, `SCL` | `GPIO6`, `GPIO7` | Occupied by QMI8658 |
+| IMU interrupts | `INT1`, `INT2` | `GPIO47`, `GPIO48` | Occupied by QMI8658 |
+| Battery sense | `BAT_ADC` divider | `GPIO1` | Occupied by battery voltage monitor |
+| JTAG signals (header) | `MTCK`, `MTDO`, `MTDI`, `MTMS` | `GPIO39`, `GPIO40`, `GPIO41`, `GPIO42` | Exposed, but note GPIO40 overlap with LCD backlight |
+
+Decision:
+- Current debug policy for this module is `UART-only` until a USB-JTAG-capable path/probe is available.
+- Non-interactive monitor capture is the default verification method in this repo.
+
+## UART-Only Validation (hello_lcd)
+- Project: `PROJECTS/zephyr/hello_lcd`
+- Build/flash target: `esp32s3_touch_lcd_1_28/esp32s3/procpu`
+- Verified markers over UART after flash:
+  - `*** Booting Zephyr OS build v3.7.1 ***`
+  - `<inf> app: LCD hello rendered`
+- Touch controller logs were initially noisy (`cst816s` + `i2c_esp32` transfer errors).
+- Mitigation adopted for this display-only app:
+  - `PROJECTS/zephyr/hello_lcd/app.overlay` disables `&cst816s` and root `lvgl_pointer`.
+  - Result: zero CST/I2C error spam in UART capture for this app.
+
 ## Sources
 - Zephyr latest espressif OpenOCD guidance:
   - https://docs.zephyrproject.org/latest/boards/espressif/common/openocd-debugging.html
@@ -55,4 +83,3 @@ Date: 2026-02-22
   - https://docs.zephyrproject.org/latest/boards/waveshare/esp32s3_touch_lcd_1_28/doc/index.html
 - Espressif ESP32-S3 JTAG debugging:
   - https://docs.espressif.com/projects/esp-idf/en/release-v5.3/esp32s3/api-guides/jtag-debugging/index.html
-

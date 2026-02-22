@@ -180,6 +180,28 @@ Important hardware precondition:
 For latest-vs-LTS debug deltas and tracked mitigations, see:
 - `ZEPHYR_DEBUG_RECON.md`
 
+## 6d) First Display Project (`hello_lcd`)
+After toolchain sanity via `samples/hello_world`, build and flash the repo app:
+
+```bash
+source ~/zephyrproject/.venv/bin/activate
+cd ~/zephyrproject
+
+west build -p always \
+  -b esp32s3_touch_lcd_1_28/esp32s3/procpu \
+  -s /path/to/repo/PROJECTS/zephyr/hello_lcd \
+  -d /path/to/repo/PROJECTS/zephyr/hello_lcd/build
+
+west flash -d /path/to/repo/PROJECTS/zephyr/hello_lcd/build
+```
+
+UART verification marker:
+- `<inf> app: LCD hello rendered`
+
+Note:
+- `PROJECTS/zephyr/hello_lcd/app.overlay` disables touch input for this
+  first display-only demo to keep UART logs clean.
+
 ## 7) Serial Access Stability on Pi5
 If flashing/monitor intermittently fails due serial-device grabs:
 
@@ -200,6 +222,9 @@ sudo systemctl disable ModemManager
 ## 9) Debug Tooling Note (Latest Guidance)
 - Newer Zephyr docs explicitly note that ESP targets may require Espressif-specific OpenOCD builds/scripts.
 - This repo tracks upstream debug config snapshots under `configs/openocd/` so LTS workflows can selectively adopt fixes.
+- For the current Waveshare module USB routing, day-to-day debugging is UART-first.
+- Use `scripts/zephyr_idf_monitor_capture.sh` as the non-interactive monitor path.
+- See `ZEPHYR_DEBUG_RECON.md` for hardware routing evidence and JTAG prerequisites.
 
 ## Sources
 - Zephyr releases (LTS status and supported releases):

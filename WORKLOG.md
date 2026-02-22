@@ -40,3 +40,8 @@
 - [1771786217] Added scripts/zephyr_idf_monitor_capture.sh for non-interactive idf_monitor backend capture (script+timeout) and validated Hello World capture on Pi5.
 - [1771786217] Added scripts/zephyr_openocd_gdb_batch.sh for OpenOCD+xtensa-gdb batch debugging with USB-JTAG VID:PID precheck and clear UART-only failure guidance.
 - [1771786217] Documented debug blockers/mitigations in ZEPHYR_DEBUG_RECON.md and updated README/ZEPHYR_LTS_PI5_SETUP.md/AGENTS.md accordingly.
+- [1771787950] Added Zephyr app scaffold under PROJECTS/zephyr/hello_lcd (CMake, prj.conf, main.c, board conf, app README).
+- [1771787951] Synced hello_lcd to Pi5, built with west for esp32s3_touch_lcd_1_28/esp32s3/procpu, and flashed to /dev/ttyACM0.
+- [1771787952] Verified UART-only bring-up non-interactively: boot banner + '<inf> app: LCD hello rendered' captured after reset pulse.
+- [1771787953] Reduced UART noise by disabling touch nodes (&cst816s + lvgl_pointer) in hello_lcd app.overlay; rebuilt/reflashed and confirmed zero CST/I2C error lines.
+- [1771787954] Updated README/ZEPHYR_LTS_PI5_SETUP.md/ZEPHYR_DEBUG_RECON.md/.gitignore with UART-only first-project details and Zephyr project ignore patterns.
