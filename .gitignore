@@ -1,3 +1,24 @@
 .env
 QUICK/firmware/tmp/
 QUICK/firmware/*.zip
+
+# Python / uv
+.venv/
+__pycache__/
+*.pyc
+
+# ESP-IDF build outputs
+build/
+sdkconfig
+sdkconfig.old
+managed_components/
+dependencies.lock
+
+# Zephyr / CMake outputs
+.west/
+CMakeCache.txt
+CMakeFiles/
+compile_commands.json
+
+# Rust build outputs
+target/

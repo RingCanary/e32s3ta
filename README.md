@@ -14,7 +14,13 @@ This repository bootstraps a fresh embedded workflow for the Waveshare ESP32-S3-
 - `QUICK/code/`: first MicroPython scripts (`display_smoke.py`, `logo_show.py`, `logo_anim.py`, `main.py`)
 - `QUICK/assets/`: image assets (`openai_logo_240.bmp`, `openai_logo_240.jpg`)
 - `QUICK/DATASHEET.md`: board and component datasheet links/notes
+- `QUICK/DEV_STACK_COMPARISON.md`: research-backed comparison of next development stacks
 - `WORKLOG.md`: epoch-stamped progress log
+
+## Next-Step Planning
+- Before moving from quick bring-up to full development, review stack tradeoffs in:
+  - `QUICK/DEV_STACK_COMPARISON.md`
+- The current recommendation is to establish an `ESP-IDF` baseline first, then run Zephyr and Rust spikes against objective criteria.
 
 ## Prerequisites (Linux/WSL)
 - USB-connected ESP32-S3 board visible as a serial device

@@ -13,3 +13,6 @@
 - [1771776123] Optimized logo animation to low-refresh dirty-region updates (no full-frame redraw in loop).
 - [1771776123] Added logo_show.py and updated boot flow to show logo splash then optimized animation.
 - [1771776123] Uploaded updated scripts/assets to board and validated logo display + finite animation run.
+- [1771776761] Researched official docs/releases for Bare Metal C, ESP-IDF, Zephyr, and Embedded Rust/Embassy stack comparison.
+- [1771776761] Added QUICK/DEV_STACK_COMPARISON.md with source-backed decision table and recommendations.
+- [1771776761] Updated README with stack-planning pointer and expanded .gitignore for ESP-IDF/Zephyr/Rust build artifacts.
