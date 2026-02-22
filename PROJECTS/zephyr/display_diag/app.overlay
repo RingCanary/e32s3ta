@@ -1,0 +1,40 @@
+/*
+ * Waveshare ESP32-S3-LCD-1.28 (non-touch) pin corrections relative to
+ * esp32s3_touch_lcd_1_28 upstream board target.
+ */
+#include <zephyr/dt-bindings/pinctrl/esp32s3-gpio-sigmap.h>
+
+&pinctrl {
+	spim2_non_touch_default: spim2_non_touch_default {
+		group1 {
+			pinmux = <SPIM2_SCLK_GPIO10>, <SPIM2_CSEL_GPIO9>;
+		};
+		group2 {
+			pinmux = <SPIM2_MOSI_GPIO11>;
+			output-low;
+		};
+	};
+};
+
+&spi2 {
+	pinctrl-0 = <&spim2_non_touch_default>;
+	pinctrl-names = "default";
+};
+
+/ {
+	mipi_dbi {
+		reset-gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
+	};
+
+	lvgl_pointer {
+		status = "disabled";
+	};
+};
+
+&gc9a01 {
+	mipi-max-frequency = <40000000>;
+};
+
+&cst816s {
+	status = "disabled";
+};
