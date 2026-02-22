@@ -16,3 +16,6 @@
 - [1771776761] Researched official docs/releases for Bare Metal C, ESP-IDF, Zephyr, and Embedded Rust/Embassy stack comparison.
 - [1771776761] Added QUICK/DEV_STACK_COMPARISON.md with source-backed decision table and recommendations.
 - [1771776761] Updated README with stack-planning pointer and expanded .gitignore for ESP-IDF/Zephyr/Rust build artifacts.
+- [1771779150] Clarified stack target: switched planning from latest stable Zephyr to latest LTS line (LTS3) and verified release tags/docs.
+- [1771779150] Added QUICK/ZEPHYR_LTS_PI5_SETUP.md with Pi5-first Zephyr LTS (v3.7.1) setup, uv-based west workflow, SDK, blobs, and first build/flash steps.
+- [1771779150] Updated README and stack comparison docs to reflect Zephyr LTS as selected implementation path.

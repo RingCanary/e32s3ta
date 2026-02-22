@@ -4,6 +4,10 @@ Date: 2026-02-22
 
 Scope: Waveshare `ESP32-S3-LCD-1.28` (non-touch board variant).
 
+## Decision Override
+- User-selected path: `Zephyr RTOS`.
+- Current implementation track starts with `QUICK/ZEPHYR_LTS_PI5_SETUP.md` (LTS3 line).
+
 ## Recommendation (Short)
 - Primary stack for serious product development: `ESP-IDF`.
 - Secondary spike after ESP-IDF baseline: `Zephyr RTOS`.
