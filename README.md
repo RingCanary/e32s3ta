@@ -15,6 +15,7 @@ This repository bootstraps a fresh embedded workflow for the Waveshare ESP32-S3-
 - `QUICK/code/`: first MicroPython scripts (`display_smoke.py`, `logo_show.py`, `logo_anim.py`, `main.py`)
 - `QUICK/assets/`: image assets (`openai_logo_240.bmp`, `openai_logo_240.jpg`)
 - `QUICK/DATASHEET.md`: board and component datasheet links/notes
+- `scripts/setup_zephyr_lts_pi5.sh`: automated Zephyr LTS setup script (uv + west + SDK + optional hello build)
 - `DEV_STACK_COMPARISON.md`: research-backed comparison of next development stacks
 - `ZEPHYR_LTS_PI5_SETUP.md`: Pi5 setup guide for Zephyr LTS (`v3.7.1`)
 - `WORKLOG.md`: epoch-stamped progress log
@@ -25,6 +26,23 @@ This repository bootstraps a fresh embedded workflow for the Waveshare ESP32-S3-
 - Selected implementation direction: `Zephyr RTOS` on the latest LTS line.
 - Start from:
   - `ZEPHYR_LTS_PI5_SETUP.md`
+
+## Zephyr LTS Quick Setup Script
+Run from repo root:
+
+```bash
+# Base setup (non-interactive defaults)
+bash scripts/setup_zephyr_lts_pi5.sh
+
+# Include hello_world build for board-target validation
+RUN_HELLO_BUILD=1 bash scripts/setup_zephyr_lts_pi5.sh
+```
+
+If re-running after an interrupted attempt:
+
+```bash
+INSTALL_DEPS=0 RUN_HELLO_BUILD=1 INSTALL_UDEV_RULES=0 bash scripts/setup_zephyr_lts_pi5.sh
+```
 
 ## Prerequisites (Linux/WSL)
 - USB-connected ESP32-S3 board visible as a serial device

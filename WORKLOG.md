@@ -20,3 +20,8 @@
 - [1771779150] Added QUICK/ZEPHYR_LTS_PI5_SETUP.md with Pi5-first Zephyr LTS (v3.7.1) setup, uv-based west workflow, SDK, blobs, and first build/flash steps.
 - [1771779150] Updated README and stack comparison docs to reflect Zephyr LTS as selected implementation path.
 - [1771780974] Aligned repo layout: moved Zephyr/comparison docs to repo root and updated references so QUICK remains MicroPython quickstart focused.
+- [1771783397] Added automated Zephyr LTS Pi5 setup script at scripts/setup_zephyr_lts_pi5.sh (uv + west + SDK + optional hello build).
+- [1771783397] Ran setup script remotely on Pi5: host deps, uv, west init/update, zephyr-export, and Python deps completed; SDK download/install phase started.
+- [1771783397] Hit remote-access blocker while resuming: Pi5 SSH port 22 timed out from workstation; setup completion pending when connectivity returns.
+- [1771783397] Hardened setup script for unattended reruns: INSTALL_UDEV_RULES defaulted to 0, non-interactive sudo checks added, and SDK download logging/noise improved.
+- [1771783397] Updated README.md and ZEPHYR_LTS_PI5_SETUP.md with script-first workflow and resume commands.

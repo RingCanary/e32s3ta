@@ -5,6 +5,30 @@ Date: 2026-02-22
 ## Goal
 Prepare a reproducible Zephyr LTS environment on Pi5 for Waveshare ESP32-S3-LCD-1.28 development.
 
+## Fast Path (Script)
+Preferred entrypoint:
+
+```bash
+bash scripts/setup_zephyr_lts_pi5.sh
+```
+
+Common script flags:
+
+```bash
+# Full smoke including hello_world build
+RUN_HELLO_BUILD=1 bash scripts/setup_zephyr_lts_pi5.sh
+
+# Resume after a partial run (skip apt, keep non-interactive)
+INSTALL_DEPS=0 RUN_HELLO_BUILD=1 INSTALL_UDEV_RULES=0 bash scripts/setup_zephyr_lts_pi5.sh
+
+# If your sudo requires a password and you are running interactively
+ALLOW_SUDO_PROMPT=1 INSTALL_UDEV_RULES=1 bash scripts/setup_zephyr_lts_pi5.sh
+```
+
+Notes:
+- Default is `INSTALL_UDEV_RULES=0` to avoid hidden sudo prompts in unattended runs.
+- SDK installer output is written to `/tmp/zephyr_sdk_setup.log`.
+
 ## Version Pin (LTS)
 - Zephyr line: `LTS3`
 - Zephyr release tag to use: `v3.7.1` (latest patch release on LTS3 line)
