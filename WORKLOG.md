@@ -34,3 +34,9 @@
 - [1771785240] Flashed Zephyr hello_world image to ESP32-S3 from Pi5 using west flash (runner esp32) on /dev/ttyACM0.
 - [1771785240] Verified runtime over UART: captured ESP32-S3 boot log and Zephyr banner with 'Hello World! esp32s3_touch_lcd_1_28/esp32s3/procpu'.
 - [1771785240] In non-interactive SSH, west espressif monitor failed due TTY dependency; used pyserial capture from Zephyr venv to validate serial output.
+- [1771786217] Spawned subagent for search/recon planning and incorporated findings into repo updates per AGENTS workflow.
+- [1771786217] Pulled latest Zephyr main snapshot (FETCH_HEAD=251fe8177b9) on Pi5 and compared ESP32-S3 debug files against LTS v3.7.1.
+- [1771786217] Added latest-config mirror under configs/openocd/ and documented upstream source mapping for reproducible debug config tracking.
+- [1771786217] Added scripts/zephyr_idf_monitor_capture.sh for non-interactive idf_monitor backend capture (script+timeout) and validated Hello World capture on Pi5.
+- [1771786217] Added scripts/zephyr_openocd_gdb_batch.sh for OpenOCD+xtensa-gdb batch debugging with USB-JTAG VID:PID precheck and clear UART-only failure guidance.
+- [1771786217] Documented debug blockers/mitigations in ZEPHYR_DEBUG_RECON.md and updated README/ZEPHYR_LTS_PI5_SETUP.md/AGENTS.md accordingly.

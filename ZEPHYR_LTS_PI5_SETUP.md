@@ -147,6 +147,39 @@ Expected serial output:
 - `***** Booting Zephyr OS ... *****`
 - `Hello World! ...`
 
+## 6b) Non-Interactive Monitor Capture (Headless)
+Use the repo script to capture monitor output in a bounded, non-interactive session while still using Espressif monitor backend (`idf_monitor.py`):
+
+```bash
+bash scripts/zephyr_idf_monitor_capture.sh
+```
+
+Common overrides:
+
+```bash
+PORT=/dev/ttyACM0 DURATION_SEC=15 EXPECT_PATTERN="Hello World!" bash scripts/zephyr_idf_monitor_capture.sh
+```
+
+Why this exists:
+- `west espressif monitor` expects an interactive TTY.
+- CI/SSH automation can fail with `termios` errors.
+- The script wraps the backend monitor in `script + timeout`.
+
+## 6c) OpenOCD + xtensa-gdb Batch Debug
+Use this when USB-JTAG is available:
+
+```bash
+bash scripts/zephyr_openocd_gdb_batch.sh
+```
+
+Important hardware precondition:
+- `lsusb` must show ESP USB-JTAG endpoint `303a:1001`.
+- If you only see USB-UART bridge IDs (for example QinHeng `1a86:55d3`), OpenOCD/JTAG debug cannot start.
+- Use native ESP32-S3 USB D+/D- debug port (or an external JTAG probe).
+
+For latest-vs-LTS debug deltas and tracked mitigations, see:
+- `ZEPHYR_DEBUG_RECON.md`
+
 ## 7) Serial Access Stability on Pi5
 If flashing/monitor intermittently fails due serial-device grabs:
 
@@ -164,6 +197,10 @@ sudo systemctl disable ModemManager
 - Our board is `ESP32-S3-LCD-1.28` (non-touch).
 - `hello_world` bring-up is suitable for toolchain validation, but board-specific display/touch behavior may require DTS/overlay adjustments.
 
+## 9) Debug Tooling Note (Latest Guidance)
+- Newer Zephyr docs explicitly note that ESP targets may require Espressif-specific OpenOCD builds/scripts.
+- This repo tracks upstream debug config snapshots under `configs/openocd/` so LTS workflows can selectively adopt fixes.
+
 ## Sources
 - Zephyr releases (LTS status and supported releases):
   - https://docs.zephyrproject.org/latest/releases/index.html
@@ -176,3 +213,7 @@ sudo systemctl disable ModemManager
   - https://github.com/zephyrproject-rtos/zephyr/tree/v3.7.1/boards/waveshare/esp32s3_touch_lcd_1_28
 - Zephyr SDK releases:
   - https://github.com/zephyrproject-rtos/sdk-ng/releases/tag/v0.16.8
+- Zephyr latest Espressif OpenOCD debugging note:
+  - https://docs.zephyrproject.org/latest/boards/espressif/common/openocd-debugging.html
+- Espressif ESP32-S3 JTAG debugging guide:
+  - https://docs.espressif.com/projects/esp-idf/en/release-v5.3/esp32s3/api-guides/jtag-debugging/index.html

@@ -16,8 +16,12 @@ This repository bootstraps a fresh embedded workflow for the Waveshare ESP32-S3-
 - `QUICK/assets/`: image assets (`openai_logo_240.bmp`, `openai_logo_240.jpg`)
 - `QUICK/DATASHEET.md`: board and component datasheet links/notes
 - `scripts/setup_zephyr_lts_pi5.sh`: automated Zephyr LTS setup script (uv + west + SDK + optional hello build)
+- `scripts/zephyr_idf_monitor_capture.sh`: non-interactive monitor capture via Espressif `idf_monitor.py` backend
+- `scripts/zephyr_openocd_gdb_batch.sh`: batch OpenOCD + xtensa-gdb debug entrypoint with USB-JTAG precheck
+- `configs/openocd/`: locally tracked upstream OpenOCD config mirror(s)
 - `DEV_STACK_COMPARISON.md`: research-backed comparison of next development stacks
 - `ZEPHYR_LTS_PI5_SETUP.md`: Pi5 setup guide for Zephyr LTS (`v3.7.1`)
+- `ZEPHYR_DEBUG_RECON.md`: latest-vs-LTS debug recon, issues, and mitigations
 - `WORKLOG.md`: epoch-stamped progress log
 
 ## Next-Step Planning
@@ -42,6 +46,26 @@ If re-running after an interrupted attempt:
 
 ```bash
 INSTALL_DEPS=0 RUN_HELLO_BUILD=1 INSTALL_UDEV_RULES=0 bash scripts/setup_zephyr_lts_pi5.sh
+```
+
+## Non-Interactive Monitor (Espressif Backend)
+This runs the same backend process used by `west espressif monitor`, but in bounded headless mode:
+
+```bash
+bash scripts/zephyr_idf_monitor_capture.sh
+```
+
+Useful overrides:
+
+```bash
+PORT=/dev/ttyACM0 DURATION_SEC=15 EXPECT_PATTERN="Hello World!" bash scripts/zephyr_idf_monitor_capture.sh
+```
+
+## OpenOCD + xtensa-gdb (Batch)
+This path requires ESP32-S3 USB-JTAG visibility (`lsusb` should show `303a:1001`), not only a USB-UART bridge.
+
+```bash
+bash scripts/zephyr_openocd_gdb_batch.sh
 ```
 
 ## Prerequisites (Linux/WSL)

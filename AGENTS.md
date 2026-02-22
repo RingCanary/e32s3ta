@@ -8,6 +8,8 @@
 - Prefer reproducible commands and scriptable steps.
 - Use `uv` for Python tooling and package/runtime execution.
 - Do not use `pip` or `requirements.txt`.
+- For search/recon tasks, spawn subagents to gather findings in parallel.
+- Synthesize subagent findings into repo docs/scripts and record decisions in `WORKLOG.md`.
 
 ## Commit Discipline
 - Commit at clear checkpoints with descriptive messages.
