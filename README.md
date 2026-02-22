@@ -10,20 +10,21 @@ This repository bootstraps a fresh embedded workflow for the Waveshare ESP32-S3-
 - Boot demo deployed as `main.py` with a low-refresh Codex-style animation
 
 ## Layout
+- `QUICK/`: MicroPython quickstart assets only
 - `QUICK/firmware/`: firmware binary
 - `QUICK/code/`: first MicroPython scripts (`display_smoke.py`, `logo_show.py`, `logo_anim.py`, `main.py`)
 - `QUICK/assets/`: image assets (`openai_logo_240.bmp`, `openai_logo_240.jpg`)
 - `QUICK/DATASHEET.md`: board and component datasheet links/notes
-- `QUICK/DEV_STACK_COMPARISON.md`: research-backed comparison of next development stacks
-- `QUICK/ZEPHYR_LTS_PI5_SETUP.md`: Pi5 setup guide for Zephyr LTS (`v3.7.1`)
+- `DEV_STACK_COMPARISON.md`: research-backed comparison of next development stacks
+- `ZEPHYR_LTS_PI5_SETUP.md`: Pi5 setup guide for Zephyr LTS (`v3.7.1`)
 - `WORKLOG.md`: epoch-stamped progress log
 
 ## Next-Step Planning
 - Before moving from quick bring-up to full development, review stack tradeoffs in:
-  - `QUICK/DEV_STACK_COMPARISON.md`
+  - `DEV_STACK_COMPARISON.md`
 - Selected implementation direction: `Zephyr RTOS` on the latest LTS line.
 - Start from:
-  - `QUICK/ZEPHYR_LTS_PI5_SETUP.md`
+  - `ZEPHYR_LTS_PI5_SETUP.md`
 
 ## Prerequisites (Linux/WSL)
 - USB-connected ESP32-S3 board visible as a serial device

@@ -2,7 +2,7 @@
 
 ## Scope
 - Repository bootstrap for Waveshare ESP32-S3-LCD-1.28 quick bring-up using MicroPython.
-- Keep first-run artifacts in `QUICK/`.
+- Keep first-run MicroPython artifacts in `QUICK/`.
 
 ## Workflow
 - Prefer reproducible commands and scriptable steps.
@@ -16,7 +16,8 @@
 ## Artifacts
 - Put firmware binaries under `QUICK/firmware/`.
 - Put initial MicroPython code under `QUICK/code/`.
-- Keep hardware notes/datasheet summaries as Markdown in `QUICK/`.
+- Keep quick hardware notes/datasheet summaries as Markdown in `QUICK/`.
+- Keep non-MicroPython platform docs (Zephyr/RTOS planning/setup) at repo root.
 - Track progress in `WORKLOG.md` with epoch-prefixed line items.
 
 ## Device Access

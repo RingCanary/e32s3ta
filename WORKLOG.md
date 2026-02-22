@@ -19,3 +19,4 @@
 - [1771779150] Clarified stack target: switched planning from latest stable Zephyr to latest LTS line (LTS3) and verified release tags/docs.
 - [1771779150] Added QUICK/ZEPHYR_LTS_PI5_SETUP.md with Pi5-first Zephyr LTS (v3.7.1) setup, uv-based west workflow, SDK, blobs, and first build/flash steps.
 - [1771779150] Updated README and stack comparison docs to reflect Zephyr LTS as selected implementation path.
+- [1771780974] Aligned repo layout: moved Zephyr/comparison docs to repo root and updated references so QUICK remains MicroPython quickstart focused.
