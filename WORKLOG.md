@@ -4,3 +4,8 @@
 - [1771775296] On Pi5: verified /dev/ttyACM0, used uvx esptool to erase+flash S3-Touch-LCD-1.28-MPY.bin on ESP32-S3.
 - [1771775296] On Pi5: validated MicroPython boot and gc9a01 module via uvx mpremote.
 - [1771775296] Uploaded QUICK/code/main.py + display_smoke.py and executed display smoke test (completed).
+- [1771775885] Diagnosed boot issue: main.py crashed on reset due to gc9a01.ORANGE missing in this firmware build.
+- [1771775885] Replaced boot demo with QUICK/code/logo_anim.py (Codex-style animation) and updated QUICK/code/main.py entrypoint.
+- [1771775885] Generalized README for Linux/WSL direct-serial workflow; removed environment-specific SSH instructions.
+- [1771775885] Uploaded logo_anim.py+main.py to board and executed finite logo preview successfully via mpremote.
+- [1771775889] On Pi5, stopped ModemManager to prevent /dev/ttyACM0 grabs during flashing/mpremote sessions.
