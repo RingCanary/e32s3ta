@@ -1,4 +1,39 @@
 /*
+ * Board-variant fix:
+ * Waveshare ESP32-S3-LCD-1.28 (non-touch) uses LCD_RST on GPIO12.
+ * Zephyr's touch-board DTS defaults LCD reset to GPIO14 and also maps SPI MISO
+ * to GPIO12, so we remap SPI pinctrl to MOSI/SCLK/CS only and move reset to 12.
+ */
+#include <zephyr/dt-bindings/pinctrl/esp32s3-gpio-sigmap.h>
+
+&pinctrl {
+	spim2_non_touch_default: spim2_non_touch_default {
+		group1 {
+			pinmux = <SPIM2_SCLK_GPIO10>, <SPIM2_CSEL_GPIO9>;
+		};
+		group2 {
+			pinmux = <SPIM2_MOSI_GPIO11>;
+			output-low;
+		};
+	};
+};
+
+&spi2 {
+	pinctrl-0 = <&spim2_non_touch_default>;
+	pinctrl-names = "default";
+};
+
+/ {
+	mipi_dbi {
+		reset-gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
+	};
+};
+
+&gc9a01 {
+	mipi-max-frequency = <40000000>;
+};
+
+/*
  * Display-only demo configuration:
  * keep I2C bus available, but disable touch controller and LVGL pointer input
  * so UART logs remain clean during early bring-up.

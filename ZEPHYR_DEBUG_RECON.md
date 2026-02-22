@@ -76,6 +76,19 @@ Decision:
   - `PROJECTS/zephyr/hello_lcd/app.overlay` disables `&cst816s` and root `lvgl_pointer`.
   - Result: zero CST/I2C error spam in UART capture for this app.
 
+## Board Variant Mismatch Fix (LCD-1.28 non-touch vs Zephyr touch target)
+- Symptom: UART app marker present, but no visible LCD rendering (backlight only).
+- Root cause: Zephyr touch-board DTS uses LCD reset on `GPIO14`; Waveshare non-touch board pin map lists `LCD_RST` on `GPIO12`.
+- Additional conflict: touch DTS pinctrl maps SPI2 MISO on `GPIO12`, which collides with non-touch LCD reset.
+- Mitigation implemented in `PROJECTS/zephyr/hello_lcd/app.overlay`:
+  - remap LCD reset to `GPIO12`
+  - override SPI2 pinctrl to MOSI/SCLK/CS only (no MISO on GPIO12)
+  - reduce `gc9a01` SPI max frequency to `40MHz` for conservative bring-up
+- Post-fix status:
+  - flash success
+  - UART markers present (`Booting Zephyr`, `LCD hello rendered`)
+  - touch/I2C error spam remains suppressed
+
 ## Sources
 - Zephyr latest espressif OpenOCD guidance:
   - https://docs.zephyrproject.org/latest/boards/espressif/common/openocd-debugging.html

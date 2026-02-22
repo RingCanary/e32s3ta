@@ -6,6 +6,9 @@ to the Waveshare ESP32-S3-LCD-1.28 display.
 ## Notes
 - Current bring-up mode is UART-only debugging.
 - This app disables touch input in `app.overlay` to keep UART logs clean.
+- `app.overlay` also applies non-touch board pin fixes:
+  - LCD reset remapped to `GPIO12` (Waveshare ESP32-S3-LCD-1.28 pin map)
+  - SPI2 pinctrl changed to MOSI/SCLK/CS only (to avoid GPIO12 MISO/reset conflict)
 
 ## Build
 
