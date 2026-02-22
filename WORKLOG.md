@@ -1,1 +1,6 @@
 - [1771774831] Created AGENTS.md, README.md, and QUICK workspace scaffolding.
+- [1771774980] Researched Waveshare wiki/resources via ddgr+lynx+websearch and located demo/datasheet URLs.
+- [1771775102] Pulled Waveshare demo zip, extracted MicroPython firmware, and prepared initial display code + datasheet markdown.
+- [1771775296] On Pi5: verified /dev/ttyACM0, used uvx esptool to erase+flash S3-Touch-LCD-1.28-MPY.bin on ESP32-S3.
+- [1771775296] On Pi5: validated MicroPython boot and gc9a01 module via uvx mpremote.
+- [1771775296] Uploaded QUICK/code/main.py + display_smoke.py and executed display smoke test (completed).
