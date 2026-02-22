@@ -48,3 +48,8 @@
 - [1771788075] Updated hello_lcd rendering to explicit black background + white text for guaranteed visibility; rebuilt/reflashed and reconfirmed UART markers with zero touch/I2C errors.
 - [1771788441] Debugged no-LCD-render symptom: identified non-touch board mismatch (LCD_RST on GPIO12 vs Zephyr touch target GPIO14), patched hello_lcd/app.overlay with reset remap + SPI2 pinctrl override (MOSI/SCLK/CS-only), rebuilt/reflashed, and reconfirmed UART boot/app markers with zero touch I2C spam.
 - [1771788812] Added explicit GPIO40 backlight enable + startup pulse probe in hello_lcd; reflashed and user-confirmed on-screen 'Hello World!' visibility.
+- [1771789656] Started next Zephyr iteration batch: removed temporary backlight pulse probe and upgraded hello_lcd to animated UI milestone (color-cycling title + spinner status).
+- [1771789657] Added PROJECTS/zephyr/display_diag (raw display_write path, quadrant pattern + blinking marker, non-touch overlay pin fixes).
+- [1771789658] Built hello_lcd and display_diag on Pi5 for esp32s3_touch_lcd_1_28/esp32s3/procpu; flashed and validated display_diag UART marker successfully.
+- [1771789659] Resolved hello_lcd runtime marker gap by pinning CONFIG_MAIN_STACK_SIZE=4096 in prj.conf and revalidating monitor marker '<inf> app: LCD hello rendered (animated)'.
+- [1771789660] Updated README, ZEPHYR_LTS_PI5_SETUP.md, ZEPHYR_DEBUG_RECON.md, and project READMEs for animated app + new raw diagnostic workflow.

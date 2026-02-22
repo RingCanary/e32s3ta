@@ -70,11 +70,14 @@ Decision:
 - Build/flash target: `esp32s3_touch_lcd_1_28/esp32s3/procpu`
 - Verified markers over UART after flash:
   - `*** Booting Zephyr OS build v3.7.1 ***`
-  - `<inf> app: LCD hello rendered`
+  - `<inf> app: LCD hello rendered (animated)`
 - Touch controller logs were initially noisy (`cst816s` + `i2c_esp32` transfer errors).
 - Mitigation adopted for this display-only app:
   - `PROJECTS/zephyr/hello_lcd/app.overlay` disables `&cst816s` and root `lvgl_pointer`.
   - Result: zero CST/I2C error spam in UART capture for this app.
+- Stability note:
+  - `hello_lcd` now sets `CONFIG_MAIN_STACK_SIZE=4096` directly in `prj.conf`.
+  - Board-specific conf filename was not taking effect with our board qualifier invocation.
 
 ## Board Variant Mismatch Fix (LCD-1.28 non-touch vs Zephyr touch target)
 - Symptom: UART app marker present, but no visible LCD rendering (backlight only).
@@ -88,6 +91,14 @@ Decision:
   - flash success
   - UART markers present (`Booting Zephyr`, `LCD hello rendered`)
   - touch/I2C error spam remains suppressed
+
+## Raw Display Diagnostic App
+- Project: `PROJECTS/zephyr/display_diag`
+- Purpose: isolate display hardware path without LVGL.
+- Runtime marker:
+  - `<inf> display_diag: display_diag pattern rendered (240x240, fmt=0x1)`
+- On-screen behavior:
+  - red/green/blue/white quadrants + blinking center marker
 
 ## Sources
 - Zephyr latest espressif OpenOCD guidance:

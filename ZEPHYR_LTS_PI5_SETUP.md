@@ -201,6 +201,26 @@ UART verification marker:
 Note:
 - `PROJECTS/zephyr/hello_lcd/app.overlay` disables touch input for this
   first display-only demo to keep UART logs clean.
+- `PROJECTS/zephyr/hello_lcd/prj.conf` sets `CONFIG_MAIN_STACK_SIZE=4096`
+  for stable LVGL runtime.
+
+## 6e) Raw Display Diagnostic (`display_diag`)
+For direct panel-path diagnostics without LVGL:
+
+```bash
+source ~/zephyrproject/.venv/bin/activate
+cd ~/zephyrproject
+
+west build -p always \
+  -b esp32s3_touch_lcd_1_28/esp32s3/procpu \
+  -s /path/to/repo/PROJECTS/zephyr/display_diag \
+  -d /path/to/repo/PROJECTS/zephyr/display_diag/build
+
+west flash -d /path/to/repo/PROJECTS/zephyr/display_diag/build
+```
+
+Expected UART marker:
+- `<inf> display_diag: display_diag pattern rendered`
 
 ## 7) Serial Access Stability on Pi5
 If flashing/monitor intermittently fails due serial-device grabs:

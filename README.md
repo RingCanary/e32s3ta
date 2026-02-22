@@ -8,12 +8,14 @@ This repository bootstraps a fresh embedded workflow for the Waveshare ESP32-S3-
 - Display smoke test executed successfully: `display_smoke: completed`
 - OpenAI logo assets prepared: BMP + JPEG in `QUICK/assets/`
 - Boot demo deployed as `main.py` with a low-refresh Codex-style animation
-- Zephyr `PROJECTS/zephyr/hello_lcd` built + flashed on ESP32-S3 and verified over UART (`LCD hello rendered`)
+- Zephyr `PROJECTS/zephyr/hello_lcd` built + flashed on ESP32-S3 and verified over UART (`LCD hello rendered (animated)`)
+- Zephyr `PROJECTS/zephyr/display_diag` added for raw panel diagnostics (no LVGL)
 
 ## Layout
 - `QUICK/`: MicroPython quickstart assets only
 - `PROJECTS/zephyr/`: Zephyr application projects
-- `PROJECTS/zephyr/hello_lcd/`: first Zephyr LCD app (`Hello World!` on-screen)
+- `PROJECTS/zephyr/hello_lcd/`: animated Zephyr LCD app (`Hello World!`)
+- `PROJECTS/zephyr/display_diag/`: raw Zephyr display test pattern app (quadrants + blinking marker)
 - `QUICK/firmware/`: firmware binary
 - `QUICK/code/`: first MicroPython scripts (`display_smoke.py`, `logo_show.py`, `logo_anim.py`, `main.py`)
 - `QUICK/assets/`: image assets (`openai_logo_240.bmp`, `openai_logo_240.jpg`)
@@ -75,6 +77,7 @@ bash scripts/zephyr_openocd_gdb_batch.sh
 - For this specific Waveshare module wiring, active development debug path is `UART-only`.
 - JTAG/OpenOCD flow is documented and scripted, but requires a USB-JTAG-capable connection path.
 - The initial Zephyr LCD demo (`PROJECTS/zephyr/hello_lcd`) disables touch input for clean UART bring-up logs.
+- For panel-path isolation or troubleshooting, use `PROJECTS/zephyr/display_diag` first.
 - Hardware pinout and routing evidence is tracked in:
   - `ZEPHYR_DEBUG_RECON.md`
 

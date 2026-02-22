@@ -1,7 +1,7 @@
 # hello_lcd
 
-First Zephyr project in this repository: render a static `Hello World!` label
-to the Waveshare ESP32-S3-LCD-1.28 display.
+First Zephyr project in this repository: render an animated `Hello World!`
+scene on the Waveshare ESP32-S3-LCD-1.28 display.
 
 ## Notes
 - Current bring-up mode is UART-only debugging.
@@ -9,6 +9,7 @@ to the Waveshare ESP32-S3-LCD-1.28 display.
 - `app.overlay` also applies non-touch board pin fixes:
   - LCD reset remapped to `GPIO12` (Waveshare ESP32-S3-LCD-1.28 pin map)
   - SPI2 pinctrl changed to MOSI/SCLK/CS only (to avoid GPIO12 MISO/reset conflict)
+- App sets `CONFIG_MAIN_STACK_SIZE=4096` in `prj.conf` for stable LVGL runtime.
 
 ## Build
 
@@ -57,6 +58,6 @@ ser.close()
 
 text = buf.decode('utf-8', errors='ignore')
 print("*** Booting Zephyr OS ***" if "Booting Zephyr OS" in text else "Boot banner not found")
-print("LCD hello rendered" if "LCD hello rendered" in text else "App marker not found")
+print("LCD hello rendered (animated)" if "LCD hello rendered" in text else "App marker not found")
 PY
 ```
