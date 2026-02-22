@@ -45,3 +45,4 @@
 - [1771787952] Verified UART-only bring-up non-interactively: boot banner + '<inf> app: LCD hello rendered' captured after reset pulse.
 - [1771787953] Reduced UART noise by disabling touch nodes (&cst816s + lvgl_pointer) in hello_lcd app.overlay; rebuilt/reflashed and confirmed zero CST/I2C error lines.
 - [1771787954] Updated README/ZEPHYR_LTS_PI5_SETUP.md/ZEPHYR_DEBUG_RECON.md/.gitignore with UART-only first-project details and Zephyr project ignore patterns.
+- [1771788075] Updated hello_lcd rendering to explicit black background + white text for guaranteed visibility; rebuilt/reflashed and reconfirmed UART markers with zero touch/I2C errors.
