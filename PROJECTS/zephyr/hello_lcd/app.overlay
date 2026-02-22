@@ -1,0 +1,15 @@
+/*
+ * Display-only demo configuration:
+ * keep I2C bus available, but disable touch controller and LVGL pointer input
+ * so UART logs remain clean during early bring-up.
+ */
+
+&cst816s {
+	status = "disabled";
+};
+
+/ {
+	lvgl_pointer {
+		status = "disabled";
+	};
+};
